@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Cadastro de Jogo</title>
+    <h:outputStylesheet name="styles.css" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:panel header="Cadastro de Jogo" styleClass="custom-panel">
+            <h:panelGrid columns="2" cellpadding="10" styleClass="grid-layout">
+                <h:outputLabel for="v1" value="Valor 1:" styleClass="label" />
+                <p:inputText id="v1" value="#{jogoBean.v1}" required="true"
+                             requiredMessage="Valor 1 é obrigatório"
+                             styleClass="input-field">
+                    <f:validator validatorId="javax.faces.LongRange" minimum="1" maximum="10" />
+                </p:inputText>
+
+                <h:outputLabel for="v2" value="Valor 2:" styleClass="label" />
+                <p:inputText id="v2" value="#{jogoBean.v2}" required="true"
+                             requiredMessage="Valor 2 é obrigatório"
+                             styleClass="input-field">
+                    <f:validator validatorId="javax.faces.LongRange" minimum="1" maximum="10" />
+                </p:inputText>
+
+                <h:outputLabel for="v3" value="Valor 3:" styleClass="label" />
+                <p:inputText id="v3" value="#{jogoBean.v3}" required="true"
+                             requiredMessage="Valor 3 é obrigatório"
+                             styleClass="input-field">
+                    <f:validator validatorId="javax.faces.LongRange" minimum="1" maximum="10" />
+                </p:inputText>
+
+                <h:outputLabel for="v4" value="Valor 4:" styleClass="label" />
+                <p:inputText id="v4" value="#{jogoBean.v4}" required="true"
+                             requiredMessage="Valor 4 é obrigatório"
+                             styleClass="input-field">
+                    <f:validator validatorId="javax.faces.LongRange" minimum="1" maximum="10" />
+                </p:inputText>
+
+                <h:outputLabel for="v5" value="Valor 5:" styleClass="label" />
+                <p:inputText id="v5" value="#{jogoBean.v5}" required="true"
+                             requiredMessage="Valor 5 é obrigatório"
+                             styleClass="input-field">
+                    <f:validator validatorId="javax.faces.LongRange" minimum="1" maximum="10" />
+                </p:inputText>
+            </h:panelGrid>
+
+            <div class="button-container">
+                <p:commandButton value="Salvar" action="#{jogoBean.salvar}" update="@form" styleClass="custom-button" />
+                <p:link value="Listar Jogos" outcome="listagem" styleClass="link-button link-margin" />
+            </div>
+        </p:panel>
+
+        <p:messages id="mensagens" autoUpdate="true" showDetail="true" styleClass="messages" />
+    </h:form>
+</h:body>
+</html>

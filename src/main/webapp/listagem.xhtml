@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Listagem de Jogos</title>
+</h:head>
+
+<h:body>
+    <h:form id="jogoForm">
+        <p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
+
+        <p:panel header="Listagem de Jogos">
+            <p:dataTable value="#{jogoBean.listaJogos}" var="jogo" editable="true" styleClass="table">
+                <p:ajax event="rowEdit" listener="#{jogoBean.editar}" update=":jogoForm:messages"/>
+                <p:ajax event="rowEditCancel" listener="#{jogoBean.cancelar}" update=":jogoForm:messages"/>
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{jogo.id}" />
+                </p:column>
+
+                <p:column headerText="Número Sorteado">
+                    <h:outputText value="#{jogo.numeroSorteado}" />
+                </p:column>
+
+                <p:column headerText="Valor 1">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v1}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{jogo.v1}" required="true" requiredMessage="Valor 1 é obrigatório." />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Valor 2">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v2}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{jogo.v2}" required="true" requiredMessage="Valor 2 é obrigatório." />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Valor 3">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v3}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{jogo.v3}" required="true" requiredMessage="Valor 3 é obrigatório." />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Valor 4">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v4}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{jogo.v4}" required="true" requiredMessage="Valor 4 é obrigatório." />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Valor 5">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v5}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{jogo.v5}" required="true" requiredMessage="Valor 5 é obrigatório." />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Editar">
+                    <p:rowEditor editTitle="Editar" cancelTitle="Cancelar" saveTitle="Confirmar"/>
+                </p:column>
+
+                <p:column headerText="Ações">
+                    <div style="display: flex; align-items: center;">
+                        
+
+                        <p:commandLink action="#{jogoBean.excluirJogo(jogo)}" ajax="false" update=":jogoForm" title="Excluir">
+                            <i class="pi pi-trash"></i>
+                        </p:commandLink>
+                        
+                   
+                        <p:commandLink styleClass="icon-link" title="Ver maior valor"
+                                       oncomplete="PF('dlgMaior').show();" 
+                                       action="#{jogoBean.acharMaior(jogo)}" 
+                                       update="jogoForm:dlgMaior" style="margin-left: 10px;">
+                        <i class="pi pi-search"></i>
+                       </p:commandLink>
+                    </div>
+                </p:column>    
+            </p:dataTable>
+        </p:panel>
+
+        <p:dialog id="dlgMaior" header="Maior Valor" widgetVar="dlgMaior" modal="true" closable="true">
+            <h:outputText value="O maior valor é: #{jogoBean.maiorValor}" />
+        </p:dialog>
+        
+        <p:link outcome="index" value="Cadastrar Jogo" />
+    </h:form>
+</h:body>
+</html>
